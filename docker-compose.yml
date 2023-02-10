@@ -1,0 +1,19 @@
+version: '3.4'
+services:
+  redis:
+    image: redis:7.0.8
+    ports:
+      - '6379:6379'
+    expose:
+      - '6379'
+  project-idempotency-service:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - '9002:9002'
+    expose:
+      - '9002'
+    tty: true
+    depends_on:
+      - redis
